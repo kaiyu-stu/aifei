@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心动情话墙</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            height: 100vh; 
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%); 
+            overflow: hidden; 
+            cursor: pointer;
+        }
+        .love-word {
+            position: absolute;
+            bottom: -50px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            animation: floatUp 8s linear forwards;
+            white-space: nowrap;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+        .title {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: 24px;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="title">点击屏幕，解锁更多心动</div>
+
+    <script>
+        // 情话库
+        const loveWords = [
+            "你一笑，我的心就开始忙个不停",
+            "想把所有温柔，都藏进对你的偏爱里",
+            "世界很大，但我的眼里只有你",
+            "和你在一起的每一秒，都像在拆甜甜的礼物",
+            "你不是我权衡利弊的选择，是我心动不已的偏爱",
+            "我想和你，从晨光熹微，到暮色四合",
+            "喜欢你这件事，我想藏不住，也不想藏",
+            "你出现后，我再也没想过其他人",
+            "和你有关的一切，都让我觉得特别甜",
+            "我人生中最幸运的事，就是遇见你",
+            "只要能和你在一起，平凡日子也闪闪发光",
+            "你不用多好，我喜欢就好；我不用多完美，你不嫌弃就好",
+            "我想把世界上最好的都给你，却发现世界上最好的就是你",
+            "喜欢你，不是一时兴起，是深思熟虑后的决定",
+            "有你的日子，风都是甜的，阳光都是暖的"
+        ];
+
+        // 生成随机情话
+        function createLoveWord() {
+            const word = document.createElement("div");
+            word.className = "love-word";
+            // 随机选情话
+            word.innerText = loveWords[Math.floor(Math.random() * loveWords.length)];
+            // 随机位置（左右）
+            const left = Math.random() * (window.innerWidth - 200);
+            word.style.left = `${left}px`;
+            // 随机动画时长（6-10秒）
+            const duration = 6 + Math.random() * 4;
+            word.style.animationDuration = `${duration}s`;
+            // 随机字体大小（16-22px）
+            const fontSize = 16 + Math.random() * 6;
+            word.style.fontSize = `${fontSize}px`;
+            // 添加到页面
+            document.body.appendChild(word);
+            // 动画结束后删除元素（避免内存占用）
+            setTimeout(() => {
+                word.remove();
+            }, duration * 1000);
+        }
+
+        // 自动生成（每1.5秒一个）
+        setInterval(createLoveWord, 1500);
+        // 点击页面手动生成
+        document.body.addEventListener("click", createLoveWord);
+
+        // 初始生成5个情话
+        for (let i = 0; i < 5; i++) {
+            setTimeout(createLoveWord, i * 300);
+        }
+    </script>
+</body>
+</html>
